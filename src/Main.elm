@@ -65,10 +65,6 @@ type Msg
     | NoOp
 
 
-
--- | GotViewPort (Result Never Viewport)
-
-
 locationHrefToModel : String -> Model
 locationHrefToModel here =
     if here == "http://localhost:1234/" then
@@ -92,21 +88,17 @@ update msg model =
     case msg of
         UrlChanged _ ->
             ( model
-            , Cmd.batch
-                [ getLocation ()
-                ]
+            , getLocation ()
             )
 
         Clicked url ->
             ( model
             , pushUrl url
-              -- Task.perform GotViewPort <| Task.map (\t -> Ok t) <| Browser.Dom.getViewport
             )
 
         GotLocation url ->
             ( locationHrefToModel url
             , setOffsets ()
-              -- Task.perform (\_ -> NoOp) (Browser.Dom.setViewport vp.viewport.x vp.viewport.y)
             )
 
         NoOp ->
@@ -117,6 +109,7 @@ type alias Page =
     { title : String, phrase : String }
 
 
+topPage : Html Msg
 topPage =
     div
         [ class "background top" ]
@@ -127,16 +120,25 @@ topPage =
         ]
 
 
+polanoSquarePage : Page
 polanoSquarePage =
-    { title = "ポラーノの広場", phrase = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。" }
+    { title = "ポラーノの広場"
+    , phrase = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+    }
 
 
+milkyTrainPage : Page
 milkyTrainPage =
-    { title = "銀河鉄道の夜", phrase = "カムパネルラ、また僕たち二人きりになったねえ、どこまでもどこまでも一緒に行こう。僕はもうあのさそりのようにほんとうにみんなの幸さいわいのためならば僕のからだなんか百ぺん灼やいてもかまわない。" }
+    { title = "銀河鉄道の夜"
+    , phrase = "カムパネルラ、また僕たち二人きりになったねえ、どこまでもどこまでも一緒に行こう。僕はもうあのさそりのようにほんとうにみんなの幸さいわいのためならば僕のからだなんか百ぺん灼やいてもかまわない。"
+    }
 
 
+rainWindPage : Page
 rainWindPage =
-    { title = "雨ニモマケズ風ニモマケズ", phrase = "雨ニモマケズ風ニモマケズ雪ニモ夏ノ暑サニモマケヌ丈夫ナカラダヲモチ慾ハナク決シテ瞋ラズイツモシヅカニワラッテヰル" }
+    { title = "雨ニモマケズ風ニモマケズ"
+    , phrase = "雨ニモマケズ風ニモマケズ雪ニモ夏ノ暑サニモマケヌ丈夫ナカラダヲモチ慾ハナク決シテ瞋ラズイツモシヅカニワラッテヰル"
+    }
 
 
 view : Model -> Html Msg
