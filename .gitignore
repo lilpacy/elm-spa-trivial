@@ -1,0 +1,9 @@
+.git
+.cache
+.idea
+
+node_modules
+dist
+elm-stuff
+
+
