@@ -3,8 +3,8 @@
 ## How to setup
 
 ```shell:
-git clone git@github.com:lilpacy/elm-parcel-min.git
-cd elm-parcel-min
+git clone git@github.com:lilpacy/elm-spa-trivial.git
+cd elm-spa-trivial
 npm run setup
 ```
 
